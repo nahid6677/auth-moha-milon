@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MyCreateContext } from '../providers/AuthProvider';
 
 const Ragister = () => {
-
+    const navigate = useNavigate();
     const { createUser } = useContext(MyCreateContext)
 
     const handleRagister = (e) => {
@@ -16,7 +16,9 @@ const Ragister = () => {
         // create User
         createUser(email, password)
             .then(result => {
-                console.log(result.user)
+                console.log(result.user);
+                e.target.reset();
+                navigate("/")
             })
             .catch(error => {
                 console.log(error.message)

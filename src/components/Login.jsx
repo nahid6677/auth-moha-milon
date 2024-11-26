@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MyCreateContext } from '../providers/AuthProvider';
 
 const Login = () => {
-
-    const { signInUser } = useContext(MyCreateContext);
+    const navigate = useNavigate();
+    const { signInUser, signInGoogle } = useContext(MyCreateContext);
 
 
     const handleLogin = (e) => {
@@ -17,12 +17,26 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 console.log(result.user);
+                e.target.reset();
+                navigate("/")
             })
             .catch(error => {
                 console.log("ERROR", error.message)
             })
 
     }
+
+    const handleGoogleSignIn= () =>{
+        signInGoogle()
+        .then(result => {
+            console.log(result.user);
+            navigate("/")
+        })
+        .catch(error => {
+            console.log("ERROR", error.message)
+        })
+    }
+
     return (
 
         <div className="card bg-base-100 mx-auto w-full max-w-sm shrink-0 shadow-2xl">
@@ -49,6 +63,9 @@ const Login = () => {
             </form>
             <p className=' text-center mb-4'>
                 New to this website? <Link to="/ragister"><span className='underline text-blue-600'>Ragister</span></Link>
+            </p>
+            <p className=''>
+                <button onClick={handleGoogleSignIn} className='btn btn-ghost'>Google</button>
             </p>
         </div>
 

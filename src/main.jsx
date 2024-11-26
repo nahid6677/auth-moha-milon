@@ -13,6 +13,7 @@ import Ragister from './components/Ragister.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import Order from './components/Order.jsx';
 import PrivateRoute from './route/PrivateRoute.jsx';
+import Profile from './route/Profile.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <PrivateRoute><Order></Order></PrivateRoute>
+      },
+      {
+        path: "/profile",
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>
       }
     ]
   },
